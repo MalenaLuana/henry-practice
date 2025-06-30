@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlin-kapt")
+    alias(libs.plugins.hilt)
+    id("com.google.devtools.ksp") version "2.0.21-1.0.27" apply false
 }
 
 android {
@@ -34,9 +37,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
@@ -56,4 +56,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.hilt.android)
+    implementation(project(":feature:home"))
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
 }

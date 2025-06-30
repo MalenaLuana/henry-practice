@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "ProyectoIntegrador"
 include(":app")
- 
+include(":feature:home")
+include(":data")
+include(":core:model")
