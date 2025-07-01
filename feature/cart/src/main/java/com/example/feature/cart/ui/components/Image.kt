@@ -1,4 +1,4 @@
-package com.example.feature.home.ui.components
+package com.example.feature.cart.ui.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape

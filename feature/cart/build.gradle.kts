@@ -1,11 +1,14 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    kotlin("plugin.serialization") version "2.0.21"
+    id("com.google.dagger.hilt.android") version "2.56.2" apply false
+    id("com.google.devtools.ksp") version "2.0.21-1.0.27" apply false
+    id("kotlin-kapt")
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "com.example.core.model"
+    namespace = "com.example.feature.home"
     compileSdk = 35
 
     defaultConfig {
@@ -31,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures{
+        compose=true
+    }
 }
 
 dependencies {
@@ -41,5 +47,19 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.kotlinx.serialization.json.v151)
+    implementation(project(":data"))
+    implementation(project(":core:model"))
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.ui)
+    implementation(libs.material3)
+    implementation(libs.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
+    implementation(libs.androidx.activity.compose.v172)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.androidx.datastore.preferences)
+    implementation( libs.kotlinx.serialization.json)
 }
