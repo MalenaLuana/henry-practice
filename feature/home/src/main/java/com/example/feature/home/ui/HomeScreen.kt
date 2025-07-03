@@ -21,14 +21,16 @@ import com.example.core.model.CartItem
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    onProductClick: (Int) -> Unit,
+    onProductClick: (String) -> Unit,
     onAddToCartClick: (CartItem) -> Unit
 )
 {
     val viewModel: HomeViewModel = hiltViewModel()
     val products by viewModel.products.collectAsState()
 
-        Column (modifier = modifier.fillMaxSize().padding(16.dp)) {
+        Column (
+            modifier = modifier.fillMaxSize().padding(16.dp)
+        ) {
             Text(Strings.HomeSubtitle)
             LazyColumn (
                 modifier = Modifier.weight(1f)

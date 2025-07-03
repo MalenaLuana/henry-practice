@@ -29,6 +29,7 @@ fun CartProductItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             RemoteImage(src = item.imageUrl, alt = item.name)
+            Spacer(modifier = Modifier.width(8.dp))
             Column(
                 modifier = Modifier.weight(1f)
             ) {
@@ -39,7 +40,7 @@ fun CartProductItem(
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = "$${item.price}",
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.primary
                 )
             }
@@ -49,6 +50,9 @@ fun CartProductItem(
                     contentDescription = "Eliminar",
                     tint = MaterialTheme.colorScheme.error
                 )
+            }
+            if (item.quantity>1){
+                Text("x${item.quantity}")
             }
         }
     }

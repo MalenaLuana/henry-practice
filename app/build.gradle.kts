@@ -66,6 +66,7 @@ dependencies {
     //Modules
     implementation(project(":feature:home"))
     implementation(project(":feature:cart"))
+    implementation(project(":feature:profile"))
     implementation(project(":core:model"))
 
 }

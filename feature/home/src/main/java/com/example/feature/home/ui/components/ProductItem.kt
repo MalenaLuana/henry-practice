@@ -18,14 +18,14 @@ import com.example.feature.home.ui.Strings
 @Composable
 fun ProductItem(
     product: Product,
-    onClick: (Int) -> Unit = {},
+    onClick: (String) -> Unit = {},
     onAddToCartClick: (CartItem)->Unit = {}
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { onClick(product.id) },
+            .clickable { onClick(product._id) },
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Row(modifier = Modifier.padding(16.dp)){

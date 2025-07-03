@@ -19,7 +19,6 @@ class CartViewModel @Inject constructor(
     private val _cartItems = MutableStateFlow<List<CartItem>>(emptyList())
     val cartItems: StateFlow<List<CartItem>> = _cartItems.asStateFlow()
     init {
-        // Escuchar los datos guardados al iniciar
         viewModelScope.launch {
             cartDataStore.cartItemsFlow.collect {
                 _cartItems.value = it
@@ -42,10 +41,11 @@ class CartViewModel @Inject constructor(
             currentItems.add(item)
         }
         _cartItems.value = currentItems
+        Log.d("cart", "Items actuales: $currentItems")
         saveCart()
     }
 
-    fun removeItemFromCart(id:Int){
+    fun removeItemFromCart(id:String){
         _cartItems.value = _cartItems.value.filterNot { it.id == id }
         saveCart()
     }

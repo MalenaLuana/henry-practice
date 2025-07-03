@@ -5,7 +5,7 @@ import com.example.core.model.Product
 
 fun Product.toCartItem(): CartItem {
     return CartItem(
-        id = this.id,
+        id = this._id,
         name = this.name,
         price = this.price,
         imageUrl = this.imageUrl,

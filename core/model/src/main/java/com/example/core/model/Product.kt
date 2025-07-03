@@ -1,7 +1,7 @@
 package com.example.core.model
 
 data class Product(
-    val id: Int,
+    val _id: String,
     val name: String,
     val price: Double,
     val imageUrl: String,
