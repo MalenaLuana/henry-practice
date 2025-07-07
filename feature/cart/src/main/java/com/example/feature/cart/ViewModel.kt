@@ -46,7 +46,18 @@ class CartViewModel @Inject constructor(
     }
 
     fun removeItemFromCart(id:String){
-        _cartItems.value = _cartItems.value.filterNot { it.id == id }
+        val updatedList = _cartItems.value.mapNotNull { item ->
+            if (item.id == id) {
+                if (item.quantity > 1) {
+                    item.copy(quantity = item.quantity - 1)
+                } else {
+                    null
+                }
+            } else {
+                item
+            }
+        }
+        _cartItems.value = updatedList
         saveCart()
     }
 

@@ -1,11 +1,10 @@
 package com.example.feature.cart.store
 
 import android.content.Context
-import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import com.example.core.model.CartItem
+import com.example.data.dataStore.userDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,15 +17,13 @@ import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 
-private val Context.dataStore by preferencesDataStore("user_prefs")
-
 object CartPreferenceKeys {
     val CART_ITEMS = stringPreferencesKey("cart_items")
 }
 
 class CartDataStore (private val context: Context) {
 
-    val cartItemsFlow:Flow<List<CartItem>> =context.dataStore.data
+    val cartItemsFlow:Flow<List<CartItem>> =context.userDataStore.data
         .map { prefs ->  prefs[CartPreferenceKeys.CART_ITEMS]?.let { json ->
         try {
             Json.decodeFromString<List<CartItem>>(json)
@@ -35,7 +32,7 @@ class CartDataStore (private val context: Context) {
         }
     } ?: emptyList() }
     suspend fun saveCartItems(cartItems: List<CartItem>) {
-        context.dataStore.edit{ prefs ->
+        context.userDataStore.edit{ prefs ->
             prefs[CartPreferenceKeys.CART_ITEMS] = Json.encodeToString(cartItems)
         }
     }

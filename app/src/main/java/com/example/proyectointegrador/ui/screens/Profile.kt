@@ -12,27 +12,21 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import com.example.feature.home.ui.HomeScreen
 import com.example.feature.profile.ui.ProfileScreen
+import com.example.proyectointegrador.ui.LocalNavController
 import com.example.proyectointegrador.ui.layout.DefaultNavBar
 
 @ExperimentalMaterial3Api
 @Composable
 fun ProfilePage(
-    navController: NavController,
     selectedDestination:Int,
     onDestinationSelected:(Int)->Unit)
 {
+    val navController = LocalNavController.current
     Scaffold (
         topBar = {
             TopAppBar(
-                title = { Text("Tu perfil") },
-                actions = {
-                    IconButton(onClick = {navController.navigate("cart"){launchSingleTop=true} }) {
-                        Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = "Carrito")
-                    }
-                },
+                title = { Text("Tu perfil") }
             )
         },
         bottomBar = {
@@ -44,7 +38,7 @@ fun ProfilePage(
         }
     ) { innerPadding  ->
         Box(modifier = Modifier.padding(innerPadding )){
-            ProfileScreen()
+            ProfileScreen(onLoginClick = { navController.navigate("login") })
         }
     }
 }
